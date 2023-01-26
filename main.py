@@ -6,11 +6,8 @@ price = int(input("input price in robux: "))
 with open('cookie.txt', 'r') as f:
     roblosecurity = f'.ROBLOSECURITY={f.read()}'
 
-csrf = requests.post(url='https://auth.roblox.com/v2/logout', headers={'cookie': roblosecurity})
-token = csrf.headers["x-csrf-token"]
-
-getuserid = requests.get(url='https://users.roblox.com/v1/users/authenticated', headers={'cookie': roblosecurity})
-user_id = getuserid.json()["id"]
+token = requests.post(url='https://auth.roblox.com/v2/logout', headers={'cookie': roblosecurity}).headers["x-csrf-token"]
+user_id = requests.get(url='https://users.roblox.com/v1/users/authenticated', headers={'cookie': roblosecurity}).json()["id"]
 
 getuaids = requests.get(url=f"https://inventory.roblox.com/v1/users/{user_id}/items/0/{item_id}")
 uaids = [i['instanceId'] for i in getuaids.json()['data']]
