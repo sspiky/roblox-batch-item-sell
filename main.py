@@ -1,6 +1,5 @@
 import requests
 
-
 item_id = int(input("input item id: "))
 price = int(input("input price in robux: "))
 
